@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="#"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
+	<title>MovieHeaven-Homepage</title>
+</head>
+<body>	
+	<div class="nk-container">
+		<!-- header -->
+		<header class="bg-dark sticky-top">
+			<div class="container">
+				<!-- 导航 -->
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<!-- logo -->
+					<a class="navbar-brand" href="#"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<!-- 功能 -->
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item ml-3 btn-group-vertical">
+								<a class="nav-link" th:href="@{/index}">首页</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<!-- content -->
+		<div class="main">
+			<div class="container">
+				<div class="position-relative">
+					<ul class="nav nav-tabs mb-3">
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Movie List</a>
+						</li>
+					</ul>
+					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal">发布影评</button>
+				</div>
+				<!-- 发布弹出框 -->
+				<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="publishModalLabel">影评发布</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="recipient-name" class="col-form-label">标题：</label>
+										<input type="text" class="form-control" id="recipient-name">
+									</div>
+									<div class="form-group">
+										<label for="message-text" class="col-form-label">正文：</label>
+										<textarea class="form-control" id="message-text" rows="15"></textarea>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" id="publishBtn">发布</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 发布提示框 -->
+				<div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="hintModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="hintModalLabel">提示</h5>
+							</div>
+							<div class="modal-body" id="hintBody">
+								发布完毕!
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 电影列表 -->
+				<ul class="list-unstyled">
+
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">漫威宇宙无敌世界观</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">阿凡达2水之道带给你视觉盛宴</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">权利的游戏烂尾给导演寄刀片</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">绝命毒师带你和老白小粉一起惊险制毒</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">沙丘1的世界观宏达无比，敬请期待2</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">疾速追杀全系列让感叹基努里维斯和一狗的故事</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">机械师带你领略杰森斯坦森的硬汉形象</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">尚气带你感受传统的中国功夫元素</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li class="media pb-3 pt-3 mb-3 border-bottom">
+						<a href="#">
+							<img src="#" class="mr-4 rounded-circle user-header" alt="电影海报">
+						</a>
+						<div class="media-body">
+							<h6 class="mt-0 mb-3">
+								<a href="site/discuss-detail.html">银河护卫队带你畅游宇宙搞笑打怪</a>
+								<span class="badge badge-secondary bg-primary">Button Top</span>
+								<span class="badge badge-secondary bg-danger">Wonderful</span>
+							</h6>
+							<div class="text-muted font-size-12">
+								<u class="mr-3">Movie Heaven</u> Posted on <b>2019-04-15 15:32:18</b>
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Like 11</li>
+									<li class="d-inline ml-2">|</li>
+									<li class="d-inline ml-2">Comment 7</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<!-- Page Split -->
+				<nav class="mt-5">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" href="#">首页</a></li>
+						<li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">下一页</a></li>
+						<li class="page-item"><a class="page-link" href="#">末页</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<!-- footer -->
+		<footer class="bg-dark">
+			<div class="container">
+				<div class="row">
+					<!-- information -->
+					<div class="col-8 detail-info">
+						<div class="row">
+							<div class="col">
+								<ul class="nav">
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">聯絡我們</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">網頁指南</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">提出意見</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">無障礙支援</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">私隱政策</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">免責聲明</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">人才招聘</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<ul class="nav btn-group-vertical company-info">
+									<li class="nav-item text-white-50">
+										Address: 香港中文大學
+									</li>
+									<li class="nav-item text-white-50">
+										Contact：admin@cuhk.edu.hk
+									</li>
+									<li class="nav-item text-white-50">
+										香港中文大學2023版權所有
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/index.js}"></script>
+</body>
+</html>
