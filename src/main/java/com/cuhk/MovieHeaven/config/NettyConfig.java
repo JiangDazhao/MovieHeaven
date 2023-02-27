@@ -9,8 +9,16 @@ public class NettyConfig {
     private int port;
     private String path;
 
+    public void setPort(int port) {
+        this.port = port;
+    }
+
     public int getPort() {
         return this.port;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getPath() {

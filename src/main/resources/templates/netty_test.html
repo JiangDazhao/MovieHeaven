@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="#" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <title>NettyDebug-Page</title>
+    <script src="/js/netty_test.js"></script>
+</head>
+
+<body>
+    <div id="chat">
+        <div class="sidebar">
+            <div class="m-card">
+                <header>
+                    <p class="name">Username:</p>
+                    <p class="name" id="username"></p>
+                </header>
+            </div>
+            <div>
+                <ul id="user_list">
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div>
+                <ul id="msg_list">
+                </ul>
+            </div>
+            <div>
+                <textarea placeholder="Press Enter to send." id="my_test"></textarea>
+                <div>
+                    <button id="send">Send</button>
+                </div>
+                <div>
+                    The message contents cannot be empty.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+</html>
