@@ -99,6 +99,8 @@ CREATE TABLE `user` (
   `user_id` int NOT NULL,
   `user_name` varchar(45) DEFAULT NULL,
   `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `salt` varchar(50) NULL,
+  `header_url` varchar(500) NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
