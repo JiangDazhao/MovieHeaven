@@ -85,7 +85,7 @@ public class ReviewService {
 
     // 查出所有review 行数,与输入无关
     public int findReviewRows(){
-        return reviewRowsCache.get(1);
+        return reviewRowsCache.get(1)>0?reviewRowsCache.get(1).intValue():0;
     }
 
     public Review findReviewByReviewId(int id){
