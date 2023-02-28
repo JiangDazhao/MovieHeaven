@@ -26,13 +26,13 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `movie`;
 
 CREATE TABLE `movie` (
-  `movie_id` int NOT NULL,
-  `title` varchar(45) DEFAULT NULL,
-  `genre` varchar(45) DEFAULT NULL,
-  `year` year DEFAULT NULL,
-  `info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `rating` float DEFAULT NULL,
-  PRIMARY KEY (`movie_id`)
+                         `movie_id` int AUTO_INCREMENT,
+                         `title` varchar(45) DEFAULT NULL,
+                         `genre` varchar(45) DEFAULT NULL,
+                         `year` year DEFAULT NULL,
+                         `info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+                         `rating` float DEFAULT NULL,
+                         PRIMARY KEY (`movie_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `movie` WRITE;
@@ -54,19 +54,18 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `review`;
 
 CREATE TABLE `review` (
-  `review_id` int NOT NULL,
-  `movie_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `stars` int DEFAULT NULL,
-  `review_content` varchar(45) DEFAULT NULL,
-  `review_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`review_id`),
-  KEY `fk_movid_id_idx` (`movie_id`),
-  KEY `fk_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_movid_id` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`),
-  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+                          `review_id` int AUTO_INCREMENT,
+                          `movie_id` int DEFAULT NULL,
+                          `user_id` int DEFAULT NULL,
+                          `stars` int DEFAULT NULL,
+                          `review_content` varchar(45) DEFAULT NULL,
+                          `review_time` datetime DEFAULT NULL,
+                          PRIMARY KEY (`review_id`),
+                          KEY `fk_movid_id_idx` (`movie_id`),
+                          KEY `fk_user_id_idx` (`user_id`),
+                          CONSTRAINT `fk_movid_id` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`),
+                          CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
 
@@ -96,12 +95,12 @@ DELIMITER ;
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `user_id` int NOT NULL,
-  `user_name` varchar(45) DEFAULT NULL,
-  `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `salt` varchar(50) NULL,
-  `header_url` varchar(500) NULL,
-  PRIMARY KEY (`user_id`)
+                        `user_id` int AUTO_INCREMENT,
+                        `user_name` varchar(45) DEFAULT NULL,
+                        `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+                        `salt` varchar(50) NULL,
+                        `header_url` varchar(500) NULL,
+                        PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `user` WRITE;

@@ -14,7 +14,7 @@
     <select id="selectAllReview" resultType="Review">
         select <include refid="selectFields"></include>
         from review
-        offset #{offset}, limit #{limit}
+        limit #{offset}, #{limit}
     </select>
 
     <select id="selectReviewByReviewId" resultType="Review">
@@ -35,12 +35,12 @@
     </insert>
 
 
-    <select id="selectReviewRows">
-        select count(movieId)
+    <select id="selectReviewRows" resultType="int">
+        select count(movie_id)
         from movie
     </select>
 
     <update id="updateStars">
-        update review set starts=#{starts} where review_id=#{reviewId}
+        update review set stars=#{stars} where review_id=#{reviewId}
     </update>
 </mapper>
