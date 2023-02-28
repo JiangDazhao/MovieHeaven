@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuhk.MovieHeaven.dao.ReviewMapper">
+    <sql id="selectFields">
+        review_id,movie_id,user_id,stars,review_content,review_time
+    </sql>
+
+    <sql id="insertFields">
+        movie_id,user_id,stars,review_content,review_time
+    </sql>
+
+    <select id="selectAllReview" resultType="Review">
+        select <include refid="selectFields"></include>
+        from review
+        offset #{offset}, limit #{limit}
+    </select>
+
+    <select id="selectReviewByReviewId" resultType="Review">
+        select <include refid="selectFields"></include>
+        from review
+        where review_id=#{reviewId}
+    </select>
+
+    <select id="selectReviewByMovieId" resultType="Review">
+        select <include refid="selectFields"></include>
+        from review
+        where movie_id=#{movieId}
+    </select>
+
+    <insert id="insertReview" parameterType="Review" keyProperty="reviewId">
+        insert into review(<include refid="insertFields"></include>)
+        values #{movieId},#{userId},#{stars},#{reviewContent},#{reviewTime}
+    </insert>
+
+    <update id="updateStars">
+        update review set starts=#{starts} where review_id=#{reviewId}
+    </update>
+</mapper>

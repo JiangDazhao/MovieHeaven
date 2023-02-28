@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuhk.MovieHeaven.dao.UserMapper">
+    <sql id="selectFields">
+    user_id,user_name,password,salt,header_url
+    </sql>
+    <sql id="insertFields">
+    user_name,password,salt,header_url
+    </sql>
+
+    <select id="selectById" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where user_id=#{id}
+    </select>
+
+    <select id="selectByName" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where user_name=#{name}
+    </select>
+
+    <insert id="insertUser" parameterType="User" keyProperty="userId">
+        insert into user (<include refid="insertFields"></include>)
+        values(#{userName},#{password},#{salt},#{headerUrl})
+    </insert>
+
+</mapper>

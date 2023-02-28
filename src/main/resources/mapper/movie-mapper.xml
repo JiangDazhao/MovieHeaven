@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuhk.MovieHeaven.dao.MovieMapper">
+    <sql id="selectFields">
+        movie_id,title,genre,year,info,rating
+    </sql>
+
+    <sql id="insertFields">
+        title,genre,year,info
+    </sql>
+
+    <select id="selectById" resultType="Movie">
+        select <include refid="selectFields"></include>
+        from movie
+        where movieid=#{movieId}
+    </select>
+
+    <select id="selectByTitle" resultType="Movie">
+        select <include refid="selectFields"></include>
+        from movie
+        where title=#{title}
+    </select>
+
+    <insert id="insertMovie" parameterType="Movie" keyProperty="movieId">
+        insert into movie(<include refid="insertFields"></include>)
+        values(#{title}.#{genre},#{year},#{info})
+    </insert>
+</mapper>
