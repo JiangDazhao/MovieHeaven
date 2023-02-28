@@ -34,6 +34,12 @@
         values #{movieId},#{userId},#{stars},#{reviewContent},#{reviewTime}
     </insert>
 
+
+    <select id="selectReviewRows">
+        select count(movieId)
+        from movie
+    </select>
+
     <update id="updateStars">
         update review set starts=#{starts} where review_id=#{reviewId}
     </update>

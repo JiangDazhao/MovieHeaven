@@ -11,5 +11,6 @@ public interface ReviewMapper {
     Review selectReviewByMovieId(int movieId);
     int insertReview(Review review);
 
+    int selectReviewRows();
     int updateStars(int reviewId,int stars);
 }
