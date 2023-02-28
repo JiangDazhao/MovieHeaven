@@ -1,6 +1,6 @@
 package com.cuhk.MovieHeaven.service;
 
-import com.cuhk.MovieHeaven.CommunityUtil;
+import com.cuhk.MovieHeaven.util.CommunityUtil;
 import com.cuhk.MovieHeaven.dao.UserMapper;
 import com.cuhk.MovieHeaven.entity.User;
 import org.apache.commons.lang3.StringUtils;
@@ -49,5 +49,8 @@ public class UserService {
         return map;
     }
 
+    public User findUserById(int id){
+        return userMapper.selectById(id);
+    }
 
 }

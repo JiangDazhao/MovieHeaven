@@ -1,4 +1,4 @@
-package com.cuhk.MovieHeaven;
+package com.cuhk.MovieHeaven.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;

@@ -8,4 +8,3 @@ in src/main/java/com/cuhk/MovieHeaven/MovieHeavenApplication.java
 ```java
 http://localhost:8083/movie/
 ```
-git
