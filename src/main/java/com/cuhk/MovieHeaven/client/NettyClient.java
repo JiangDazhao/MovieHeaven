@@ -3,10 +3,7 @@ package com.cuhk.MovieHeaven.client;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.fastjson.JSON;
-import com.cuhk.MovieHeaven.config.NettyConfig;
 import com.cuhk.MovieHeaven.handler.NettyClientHandler;
 import com.cuhk.MovieHeaven.pojo.NettyMessage;
 
