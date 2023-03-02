@@ -15,7 +15,7 @@ import io.netty.handler.logging.LoggingHandler;
 public class NettyServer implements DisposableBean {
 
     @Autowired
-    private NettyChannelInitializer nettyChannelInitializer;
+    private ServerChannelInitializer serverChannelInitializer;
 
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
@@ -28,7 +28,7 @@ public class NettyServer implements DisposableBean {
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .handler(new LoggingHandler())
-                .childHandler(nettyChannelInitializer);
+                .childHandler(serverChannelInitializer);
 
         ChannelFuture sync = null;
         try {
