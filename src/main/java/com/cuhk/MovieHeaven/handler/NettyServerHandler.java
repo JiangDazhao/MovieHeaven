@@ -19,7 +19,7 @@ import com.cuhk.MovieHeaven.pojo.NettyMessage;
 
 @ChannelHandler.Sharable
 @Component
-public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     Map<String, ChannelHandlerContext> userChanMap = new ConcurrentHashMap<>(5);
     Map<ChannelId, String> chanUserMap = new ConcurrentHashMap<>(6);
     List<ChannelHandlerContext> chanList = new CopyOnWriteArrayList<>();
