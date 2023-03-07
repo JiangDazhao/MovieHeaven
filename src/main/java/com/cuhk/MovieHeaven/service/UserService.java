@@ -98,6 +98,10 @@ public class UserService {
         return map;
     }
 
+    public LoginTicket findLoginTicket(String ticketStr){
+        String ticketKey=RedisKeyUtil.getLoginTicketKey(ticketStr);
+        return (LoginTicket) redisTemplate.opsForValue().get(ticketKey);
+    }
 
     public User findUserById(int id){
         return userMapper.selectById(id);
