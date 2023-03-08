@@ -18,6 +18,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<TextWebSocke
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("Exception is caught by the client handler!!!!!!!!!!1");
         cause.printStackTrace();
         ctx.close();
     }

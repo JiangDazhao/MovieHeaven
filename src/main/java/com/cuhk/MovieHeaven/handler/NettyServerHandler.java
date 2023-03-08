@@ -35,6 +35,8 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
         System.out.println("The message received from the front end:" + msg.text());
         NettyMessage rcv_msg = JSON.parseObject(msg.text(), NettyMessage.class);
         if (rcv_msg.getType() == 0) {
+            System.out.println("received!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(rcv_msg);
             setMap(rcv_msg.getUsername(), ctx);
             for (ChannelHandlerContext handlerContext : userChanMap.values()) {
                 if (handlerContext == ctx) {
@@ -43,17 +45,22 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
                 handlerContext.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(rcv_msg)));
             }
             return;
+        } else if (rcv_msg.getType() == 1) {
+            System.out.println("received!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(rcv_msg);
         }
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         String username = chanUserMap.get(ctx.channel().id());
-        userChanMap.remove(username);
-        for (ChannelHandlerContext handlerContext : userChanMap.values()) {
-            NettyMessage msg = new NettyMessage("Server", UUID.randomUUID().toString(),
-                    "User--" + username + "--disconneted.", 1);
-            handlerContext.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(msg)));
+        if (username != null) {
+            userChanMap.remove(username);
+            for (ChannelHandlerContext handlerContext : userChanMap.values()) {
+                NettyMessage msg = new NettyMessage("Server", UUID.randomUUID().toString(),
+                        "User--" + username + "--disconneted.", 1);
+                handlerContext.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(msg)));
+            }
         }
         chanList.remove(ctx);
     }

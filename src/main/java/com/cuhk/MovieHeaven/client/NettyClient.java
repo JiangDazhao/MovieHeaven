@@ -3,6 +3,8 @@ package com.cuhk.MovieHeaven.client;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.stereotype.Component;
+
 import com.alibaba.fastjson.JSON;
 import com.cuhk.MovieHeaven.handler.NettyClientHandler;
 import com.cuhk.MovieHeaven.pojo.NettyMessage;
@@ -23,6 +25,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketClientHandshakerFactory;
 import io.netty.handler.codec.http.websocketx.WebSocketClientProtocolHandler;
 import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 
+@Component
 public class NettyClient {
     static final String HOST = System.getProperty("host", "127.0.0.1");
     static final String URL = System.getProperty("nettyUrl", "ws://127.0.0.1:8084/netty");
@@ -49,6 +52,8 @@ public class NettyClient {
                         };
                     });
             ChannelFuture future = bootstrap.connect(HOST, PORT);
+            System.out.println("So far is ok!!!!!!!!");
+            System.out.println(msg);
             future.channel().writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(msg)));
             future.channel().closeFuture().sync();
             group.shutdownGracefully();

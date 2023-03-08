@@ -12,4 +12,13 @@ public class NettyMessage {
     private String msgId;
     private String msg;
     private int type;
+
+    @Override
+    public String toString() {
+        return "Netty Message{" +
+                "Username=" + this.username +
+                ", msgId=" + this.msgId +
+                ", msg=" + this.msg +
+                '}';
+    }
 }
