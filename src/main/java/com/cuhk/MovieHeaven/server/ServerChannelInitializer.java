@@ -25,8 +25,8 @@ public class ServerChannelInitializer extends ChannelInitializer<Channel> {
     protected void initChannel(Channel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new HttpServerCodec());
-        pipeline.addLast(new WebSocketServerProtocolHandler(nettyConfig.getPath()));
         pipeline.addLast(new HttpObjectAggregator(4096));
+        pipeline.addLast(new WebSocketServerProtocolHandler(nettyConfig.getPath()));
         pipeline.addLast(nettyServerHandler);
     }
 }
