@@ -116,12 +116,19 @@
 			</div>
 			<!-- 打分Review -->
 			<div class="container mt-3">
-				<form class="replyform" method="post" th:action="@{|/comment/add/${post.movieId}|}">
+				<form class="replyform" method="post" th:action="@{|/review/add/${post.movieId}|}">
 					<p class="mt-3">
 						<a name="replyform"></a>
-						<textarea placeholder="Give your review about this film!" name="reviewContent"></textarea>
-						<input type="hidden" name="entityType" value="1">
-						<input type="hidden" name="entityId" th:value="${post.movieId}">
+						<div class="form-group">
+							<input type="value" placeholder="Give your score!" name="stars">
+						</div>
+
+<!--						<textarea placeholder="Give your score!" name="stars"></textarea>-->
+						<div class="form-group">
+							<textarea placeholder="Give your review about this film!" name="reviewContent"></textarea>
+						</div>
+<!--					自动携带-->
+						<input type="hidden" name="movieId" th:value="${post.movieId}">
 					</p>
 					<p class="text-right">
 						<button type="submit" class="btn btn-primary btn-sm">&nbsp;Submit&nbsp;&nbsp;Review&nbsp;</button>

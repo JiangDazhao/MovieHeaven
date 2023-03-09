@@ -32,7 +32,7 @@
 
     <insert id="insertReview" parameterType="Review" keyProperty="reviewId">
         insert into review(<include refid="insertFields"></include>)
-        values #{movieId},#{userId},#{stars},#{reviewContent},#{reviewTime}
+        values (#{movieId},#{userId},#{stars},#{reviewContent},#{reviewTime})
     </insert>
 
     <select id="selectCountByMovieId" resultType="int">
