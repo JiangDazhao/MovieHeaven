@@ -58,7 +58,7 @@
 							<a class="nav-link active" href="#">Movie List</a>
 						</li>
 					</ul>
-					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">发布影评</button>
+					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">Publish Movie</button>
 				</div>
 				<!-- 发布弹出框 -->
 				<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
@@ -130,18 +130,18 @@
 					<ul class="pagination justify-content-center">
 						<li class="page-item">
 							<!-- /index?current=1 -->
-							<a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+							<a class="page-link" th:href="@{${page.path}(current=1)}">HomePage</a>
 						</li>
 						<li th:class="|page-item ${page.current==1?'disabled':''}|">
-							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">Prev</a></li>
 						<li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
 							<a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
 						</li>
 						<li th:class="|page-item ${page.current==page.total?'disabled':''}|">
-							<a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+							<a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">Next</a>
 						</li>
 						<li class="page-item">
-							<a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+							<a class="page-link" th:href="@{${page.path}(current=${page.total})}">LastPage</a>
 						</li>
 					</ul>
 				</nav>
