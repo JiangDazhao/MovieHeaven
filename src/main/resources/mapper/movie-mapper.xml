@@ -4,20 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cuhk.MovieHeaven.dao.MovieMapper">
     <sql id="selectFields">
-        movie_id,title,genre,year,info,rating
+        movie_id,user_id,title,genre,year,info,rating,post_time
     </sql>
 
     <sql id="insertFields">
-        title,genre,year,info
+        user_id,title,genre,year,info,post_time
     </sql>
 
-    <select id="selectById" resultType="Movie">
+    <select id="selectAllMovies" resultType="Movie">
+        select <include refid="selectFields"></include>
+        from movie
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="selectMovieByMovieId" resultType="Movie">
         select <include refid="selectFields"></include>
         from movie
         where movie_id=#{movieId}
     </select>
 
-    <select id="selectByTitle" resultType="Movie">
+    <select id="selectMovieByTitle" resultType="Movie">
         select <include refid="selectFields"></include>
         from movie
         where title=#{title}
@@ -25,6 +31,15 @@
 
     <insert id="insertMovie" parameterType="Movie" keyProperty="movieId">
         insert into movie(<include refid="insertFields"></include>)
-        values(#{title}.#{genre},#{year},#{info})
+        values(#{userId},#{title},#{genre},#{year},#{info},#{postTime})
     </insert>
+
+    <select id="selectMovieRows" resultType="int">
+        select count(movie_id)
+        from movie
+    </select>
+
+    <update id="updateRating">
+        update movie set rating=#{rating} where movie_id=#{movieId}
+    </update>
 </mapper>

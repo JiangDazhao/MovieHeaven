@@ -57,7 +57,7 @@ public class LoginController implements MovieConstants {
         Map<String,Object> map=userService.registerValidate(user);
         if(map==null||map.isEmpty()){
             model.addAttribute("msg","Successfully register!");
-            model.addAttribute("target","/index");
+            model.addAttribute("target","/login");
             return "/site/operate-result";
         }else{
             model.addAttribute("usernameMsg",map.get("usernameMsg"));

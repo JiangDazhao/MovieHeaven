@@ -36,8 +36,8 @@
 
 
     <select id="selectReviewRows" resultType="int">
-        select count(movie_id)
-        from movie
+        select count(review_id)
+        from review
     </select>
 
     <update id="updateStars">

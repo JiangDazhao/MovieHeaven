@@ -1,9 +1,12 @@
 package com.cuhk.MovieHeaven.entity;
 
 import java.time.Year;
+import java.util.Date;
 
 public class Movie {
     private int movieId;
+
+    private int userId;
 
     private String title;
 
@@ -15,12 +18,23 @@ public class Movie {
 
     private float rating;
 
+    private Date postTime;
+
+
     public int getMovieId() {
         return movieId;
     }
 
     public void setMovieId(int movieId) {
         this.movieId = movieId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -63,15 +77,25 @@ public class Movie {
         this.rating = rating;
     }
 
+    public Date getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(Date postTime) {
+        this.postTime = postTime;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
                 "movieId=" + movieId +
+                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
                 ", year=" + year +
                 ", info='" + info + '\'' +
                 ", rating=" + rating +
+                ", postTime=" + postTime +
                 '}';
     }
 }

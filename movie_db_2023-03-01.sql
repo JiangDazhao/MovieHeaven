@@ -25,14 +25,14 @@ SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `movie`;
 
-CREATE TABLE `movie` (
-  `movie_id` int NOT NULL,
-  `title` varchar(45) DEFAULT NULL,
-  `genre` varchar(45) DEFAULT NULL,
-  `year` year DEFAULT NULL,
-  `info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `rating` float DEFAULT NULL,
-  PRIMARY KEY (`movie_id`)
+create table movie(
+    movie_id int auto_increment
+        primary key,
+    title    varchar(45) null,
+    genre    varchar(10) null,
+    year     year        null,
+    info     text        null,
+    rating   float       null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `movie` WRITE;
@@ -60,18 +60,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `review`;
 
-CREATE TABLE `review` (
-  `review_id` int NOT NULL,
-  `movie_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `stars` int DEFAULT NULL,
-  `review_content` varchar(45) DEFAULT NULL,
-  `review_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`review_id`),
-  KEY `fk_movid_id_idx` (`movie_id`),
-  KEY `fk_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_movid_id` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`),
-  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+create table review(
+    review_id      int auto_increment
+        primary key,
+    movie_id       int         null,
+    user_id        int         null,
+    stars          int         null,
+    review_content varchar(45) null,
+    review_time    datetime    null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `review` WRITE;
@@ -102,14 +98,14 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `user` (
-  `user_id` int NOT NULL,
-  `user_name` varchar(45) DEFAULT NULL,
-  `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `avatar_link` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `is_admin` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create table user(
+    user_id    int auto_increment
+        primary key,
+    user_name  varchar(45)  null,
+    password   varchar(45)  null,
+    salt       varchar(50)  null,
+    header_url varchar(500) null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
