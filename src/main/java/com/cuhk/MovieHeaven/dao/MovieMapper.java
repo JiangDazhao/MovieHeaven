@@ -9,13 +9,13 @@ import java.util.List;
 public interface MovieMapper {
     List<Movie> selectAllMovies(int offset, int limit);
 
-    Movie selectMovieByMovieId(int movieId);
+    int selectMovieRows();
 
-    Movie selectMovieByTitle(String title);
+    Movie selectMovieByMovieId(int movieId);
 
     int insertMovie(Movie movie);
 
-    int selectMovieRows();
+    int updateReviewCount(int movieId, int reviewCount);
 
     int updateRating(int movieId,int rating);
 }

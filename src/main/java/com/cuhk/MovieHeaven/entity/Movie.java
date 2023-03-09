@@ -8,6 +8,8 @@ public class Movie {
 
     private int userId;
 
+    private int reviewCount;
+
     private String title;
 
     private String genre;
@@ -19,7 +21,6 @@ public class Movie {
     private float rating;
 
     private Date postTime;
-
 
     public int getMovieId() {
         return movieId;
@@ -35,6 +36,14 @@ public class Movie {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
     }
 
     public String getTitle() {
@@ -90,6 +99,7 @@ public class Movie {
         return "Movie{" +
                 "movieId=" + movieId +
                 ", userId=" + userId +
+                ", reviewCount=" + reviewCount +
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
                 ", year=" + year +

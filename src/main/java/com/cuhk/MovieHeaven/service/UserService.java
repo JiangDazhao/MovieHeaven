@@ -103,6 +103,13 @@ public class UserService {
         return (LoginTicket) redisTemplate.opsForValue().get(ticketKey);
     }
 
+    public void logout(String ticket){
+        String redisKey=RedisKeyUtil.getLoginTicketKey(ticket);
+        LoginTicket loginTicket=(LoginTicket)redisTemplate.opsForValue().get(redisKey);
+        loginTicket.setStatus(1);
+        redisTemplate.opsForValue().set(redisKey,loginTicket);
+    }
+
     public User findUserById(int id){
         return userMapper.selectById(id);
     }

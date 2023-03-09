@@ -82,10 +82,6 @@ public class MovieService {
         return movieMapper.selectMovieByMovieId(movieId);
     }
 
-    public Movie findMovieByMovieTitle(String title){
-        return movieMapper.selectMovieByTitle(title);
-    }
-
     public int addMovie(Movie movie){
         if(movie==null){
             throw new IllegalArgumentException("参数不能为空！");
@@ -94,7 +90,11 @@ public class MovieService {
         return movieMapper.insertMovie(movie);
     }
 
-    public int update(int movieId,int rating){
+    public int updateReviewCount(int movieId,int reviewCount){
+        return movieMapper.updateReviewCount(movieId,reviewCount);
+    }
+
+    public int updateRating(int movieId,int rating){
         return movieMapper.updateRating(movieId,rating);
     }
 }

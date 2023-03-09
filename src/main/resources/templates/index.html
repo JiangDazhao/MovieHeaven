@@ -115,19 +115,19 @@
 				<ul class="list-unstyled">
 
 					<li class="media pb-3 pt-3 mb-3 border-bottom" th:each="map:${moviePosts}">
+						<a>
+							<img th:src="${map.user.headerUrl}" class="mr-4 rounded-circle" alt="用户头像" style="width:50px;height:50px;">
+						</a>
 						<div class="media-body">
 							<h6 class="mt-0 mb-3">
-								<a href="site/discuss-detail.html" th:utext="${map.post.title}">漫威宇宙无敌世界观</a>
+								<a th:href="@{|/moviepost/detail/${map.post.movieId}|}" th:utext="${map.post.title}">漫威宇宙无敌世界观</a>
 								<span class="badge badge-secondary bg-primary" th:utext="${map.post.genre}"></span>
-<!--								<span class="badge badge-secondary bg-danger"></span>-->
 							</h6>
 							<div class="text-muted font-size-12">
 								<u class="mr-3" th:utext="${map.user.userName}">Movie Heaven</u> Posted on <b th:text="${#dates.format(map.post.postTime,'yyyy-MM-dd HH:mm:ss')}">2019-04-15 15:32:18</b>
-<!--								<ul class="d-inline float-right">-->
-<!--									<li class="d-inline ml-2">Like 11</li>-->
-<!--									<li class="d-inline ml-2">|</li>-->
-<!--									<li class="d-inline ml-2">Comment 7</li>-->
-<!--								</ul>-->
+								<ul class="d-inline float-right">
+									<li class="d-inline ml-2">Review <span th:text="${map.post.reviewCount}">7</span></li>
+								</ul>
 							</div>
 						</div>
 					</li>
@@ -138,7 +138,7 @@
 					<ul class="pagination justify-content-center">
 						<li class="page-item">
 							<!-- /index?current=1 -->
-							<a class="page-link" th:href="@{${page.path}(current=1)}">HomePage</a>
+							<a class="page-link" th:href="@{${page.path}(current=1)}">FirstPage</a>
 						</li>
 						<li th:class="|page-item ${page.current==1?'disabled':''}|">
 							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">Prev</a></li>

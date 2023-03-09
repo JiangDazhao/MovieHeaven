@@ -1,5 +1,6 @@
 package com.cuhk.MovieHeaven.controller;
 
+import com.cuhk.MovieHeaven.entity.LoginTicket;
 import com.cuhk.MovieHeaven.entity.User;
 import com.cuhk.MovieHeaven.service.UserService;
 import com.cuhk.MovieHeaven.util.MovieConstants;
@@ -121,6 +122,12 @@ public class LoginController implements MovieConstants {
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
             return "/site/login";
         }
+    }
+
+    @RequestMapping(path="/logout",method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket){
+       userService.logout(ticket);
+        return "redirect:/login";
     }
 
 }

@@ -6,11 +6,9 @@ import java.util.List;
 
 @Mapper
 public interface ReviewMapper {
-    List<Review> selectAllReview(int offset,int limit);
-    Review selectReviewByReviewId(int reviewId);
-    Review selectReviewByMovieId(int movieId);
+    List<Review> selectReviewsByMovieId(int movieId,int offset,int limit);
+    int selectCountByMovieId(int movieId);
     int insertReview(Review review);
+    Review selectReviewByReviewId(int reviewId);
 
-    int selectReviewRows();
-    int updateStars(int reviewId,int stars);
 }
