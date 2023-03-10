@@ -59,11 +59,11 @@ public class LoginController implements MovieConstants {
         if(map==null||map.isEmpty()){
             model.addAttribute("msg","Successfully register!");
             model.addAttribute("target","/login");
-            return "/site/operate-result";
+            return "site/operate-result";
         }else{
             model.addAttribute("usernameMsg",map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "/site/register";
+            return "site/register";
         }
     }
 
@@ -120,7 +120,7 @@ public class LoginController implements MovieConstants {
         }else{
             model.addAttribute("usernameMsg",map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "/site/login";
+            return "site/login";
         }
     }
 

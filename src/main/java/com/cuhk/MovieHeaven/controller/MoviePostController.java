@@ -20,7 +20,7 @@ import java.time.Year;
 import java.util.*;
 
 @Controller
-@RequestMapping("/moviepost")
+@RequestMapping(path="/moviepost")
 public class MoviePostController {
     @Autowired
     UserService userService;
@@ -31,7 +31,7 @@ public class MoviePostController {
     @Autowired
     ReviewService reviewService;
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(path = "/add",method = RequestMethod.POST)
     public String addMoviePost(String title, String info, String genre, Year year){
         User user = hostHolder.getUser();
         if(user==null){
@@ -50,7 +50,7 @@ public class MoviePostController {
         return MovieUtil.getJSONString(200,"Pushlish Successfully");
     }
 
-    @RequestMapping(value = "/detail/{movieId}",method = RequestMethod.GET)
+    @RequestMapping(path = "/detail/{movieId}",method = RequestMethod.GET)
     public String getMoviePostReviwDetail(@PathVariable("movieId")int movieId, Model model, Page page){
         // movie
         Movie movie = movieService.findMovieByMovieId(movieId);
@@ -77,6 +77,6 @@ public class MoviePostController {
         }
 
         model.addAttribute("reviewDetailList",reviewDetailList);
-        return "/site/moviePost-detail";
+        return "site/moviePost-detail";
     }
 }

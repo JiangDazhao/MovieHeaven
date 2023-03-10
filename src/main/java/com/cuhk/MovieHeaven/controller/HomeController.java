@@ -44,6 +44,6 @@ public class HomeController {
             }
         }
         model.addAttribute("moviePosts",moviePosts);
-        return "/index";
+        return "index";
     }
 }
