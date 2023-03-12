@@ -88,7 +88,7 @@ public class NettyClient {
             while (clientHandler.getRes() == null) {
             }
             System.out.println("loop out!");
-            resList = clientHandler.getRes().getReviewList();
+            resList.addAll(clientHandler.getRes().getReviewList());
             future.channel().closeFuture().sync();
         } catch (InterruptedException | URISyntaxException e) {
             e.printStackTrace();

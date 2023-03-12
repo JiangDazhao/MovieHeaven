@@ -36,6 +36,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<TextWebSocke
             this.res = new NettyResponse(1, rcv_res.getReviewList());
             System.out.println("copy list done!");
         }
+        ctx.close();
     }
 
     @Override
