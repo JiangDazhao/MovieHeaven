@@ -21,4 +21,12 @@ public class NettyResponse {
             this.reviewList.addAll(reviewList);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "type= " + this.type +
+                "reviewList= " + this.reviewList +
+                '}';
+    }
 }
