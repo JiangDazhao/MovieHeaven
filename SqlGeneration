@@ -1,6 +1,11 @@
+drop schema if exists movie_db;
+create schema movie_db;
+use movie_db;
+
 DROP TABLE IF EXISTS movie;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS review;
+
 
 
 create table movie(
