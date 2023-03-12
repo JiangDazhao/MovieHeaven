@@ -45,12 +45,12 @@ public class LoginController implements MovieConstants {
 
     @RequestMapping(path="/register",method = RequestMethod.GET)
     public String getRegisterPage(){
-        return "/site/register";
+        return "site/register";
     }
 
     @RequestMapping(path="/login",method = RequestMethod.GET)
     public String getLoginPage(){
-        return"/site/login";
+        return"site/login";
     }
 
     @RequestMapping(path="/register",method = RequestMethod.POST)
