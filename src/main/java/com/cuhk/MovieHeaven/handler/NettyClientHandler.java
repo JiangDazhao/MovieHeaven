@@ -3,6 +3,7 @@ package com.cuhk.MovieHeaven.handler;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.cuhk.MovieHeaven.pojo.NettyRequest;
 import com.cuhk.MovieHeaven.pojo.NettyResponse;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -14,6 +15,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<TextWebSocke
     private NettyResponse res;
 
     public NettyClientHandler() {
+        super();
         this.res = null;
     }
 
@@ -29,7 +31,11 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<TextWebSocke
     @Override
     public void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         System.out.println("Receive msg from Netty Server: " + msg.text());
-        this.res = JSON.parseObject(msg.text(), NettyResponse.class);
+        NettyResponse rcv_res = JSON.parseObject(msg.text(), NettyResponse.class);
+        if (rcv_res.getType() == 1) {
+            this.res = new NettyResponse(1, rcv_res.getReviewList());
+            System.out.println("copy list done!");
+        }
     }
 
     @Override

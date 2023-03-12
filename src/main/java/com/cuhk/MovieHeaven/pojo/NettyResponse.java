@@ -1,5 +1,6 @@
 package com.cuhk.MovieHeaven.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cuhk.MovieHeaven.entity.Review;
@@ -16,7 +17,8 @@ public class NettyResponse {
     public NettyResponse(int type, List<Review> reviewList) {
         this.type = type;
         if (type == 1) {
-            this.reviewList = reviewList;
+            this.reviewList = new ArrayList<>();
+            this.reviewList.addAll(reviewList);
         }
     }
 }

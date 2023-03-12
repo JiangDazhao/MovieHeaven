@@ -84,8 +84,10 @@ public class NettyClient {
             ChannelFuture future = initChannelFuture(group, clientHandler);
             NettyRequest queryId = new NettyRequest(1, movieId);
             future.channel().writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(queryId)));
+            System.out.println("loop in!");
             while (clientHandler.getRes() == null) {
             }
+            System.out.println("loop out!");
             resList = clientHandler.getRes().getReviewList();
             future.channel().closeFuture().sync();
         } catch (InterruptedException | URISyntaxException e) {
