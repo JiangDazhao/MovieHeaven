@@ -34,7 +34,7 @@ public class NettyServer implements DisposableBean {
         try {
             sync = serverBootstrap.bind(port).sync();
             System.out.println("Netty server starts successfully! Port Number: " + port);
-            sync.channel().closeFuture();
+            sync.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
             close();
