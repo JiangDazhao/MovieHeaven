@@ -1,178 +1,186 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="#"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="icon" href="#" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		crossorigin="anonymous">
 	<link rel="stylesheet" th:href="@{/css/global.css}" />
 	<link rel="stylesheet" th:href="@{/css/login.css}" />
 	<title>MovieHeaven-Register</title>
 </head>
+
 <body>
-<div class="nk-container">
-	<!-- 头部 -->
-	<header class="bg-dark sticky-top" th:replace="index::header">
-		<div class="container">
-			<!-- 导航 -->
-			<nav class="navbar navbar-expand-lg navbar-dark">
-				<!-- logo -->
-				<a class="navbar-brand" href="#"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<!-- 功能 -->
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item ml-3 btn-group-vertical">
-							<a class="nav-link" href="../index.html">首页</a>
-						</li>
-						<li class="nav-item ml-3 btn-group-vertical">
-							<a class="nav-link position-relative" href="letter.html">消息<span class="badge badge-danger">12</span></a>
-						</li>
-						<li class="nav-item ml-3 btn-group-vertical">
-							<a class="nav-link" href="register.html">注册</a>
-						</li>
-						<li class="nav-item ml-3 btn-group-vertical">
-							<a class="nav-link" href="login.html">登录</a>
-						</li>
-						<li class="nav-item ml-3 btn-group-vertical dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle" style="width:30px;"/>
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item text-center" href="profile.html">个人主页</a>
-								<a class="dropdown-item text-center" href="setting.html">账号设置</a>
-								<a class="dropdown-item text-center" href="login.html">退出登录</a>
-								<div class="dropdown-divider"></div>
-								<span class="dropdown-item text-center text-secondary">nowcoder</span>
+	<div class="nk-container">
+		<!-- 头部 -->
+		<header class="bg-dark sticky-top" th:replace="index::header">
+			<div class="container">
+				<!-- 导航 -->
+				<nav class="navbar navbar-expand-lg navbar-dark">
+					<!-- logo -->
+					<a class="navbar-brand" href="#"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<!-- 功能 -->
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item ml-3 btn-group-vertical">
+								<a class="nav-link" href="../index.html">首页</a>
+							</li>
+							<li class="nav-item ml-3 btn-group-vertical">
+								<a class="nav-link position-relative" href="letter.html">消息<span
+										class="badge badge-danger">12</span></a>
+							</li>
+							<li class="nav-item ml-3 btn-group-vertical">
+								<a class="nav-link" href="register.html">注册</a>
+							</li>
+							<li class="nav-item ml-3 btn-group-vertical">
+								<a class="nav-link" href="login.html">登录</a>
+							</li>
+							<li class="nav-item ml-3 btn-group-vertical dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle"
+										style="width:30px;" />
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item text-center" href="profile.html">个人主页</a>
+									<a class="dropdown-item text-center" href="setting.html">账号设置</a>
+									<a class="dropdown-item text-center" href="login.html">退出登录</a>
+									<div class="dropdown-divider"></div>
+									<span class="dropdown-item text-center text-secondary">nowcoder</span>
+								</div>
+							</li>
+						</ul>
+						<!-- 搜索 -->
+						<form class="form-inline my-2 my-lg-0" action="search.html">
+							<input class="form-control mr-sm-2" type="search" aria-label="Search" />
+							<button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
+						</form>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<!-- 内容 -->
+		<div class="main">
+			<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
+				<h3 class="text-center text-info border-bottom pb-3">Register</h3>
+				<!--			post请求-->
+				<form class="mt-5" method="post" th:action="@{/register}">
+					<div class="form-group row">
+						<label for="username" class="col-sm-2 col-form-label text-right">UserName:</label>
+						<div class="col-sm-10">
+							<!--				该模版是在刚刚注册和错误返回的时候公用的，错误返回的时候，usernameMsg!=null，并且账号还需要先是，user.username从后面controller中传的model里面拿到的，其实也是刚开始注册的时候我们自己在浏览器写的name='' -->
+							<input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+								th:value="${user!=null?user.userName:''}" id="username" name="userName"
+								placeholder="Please input your username!" required>
+							<div class="invalid-feedback" th:text="${usernameMsg}">
+								该账号已存在!
 							</div>
-						</li>
-					</ul>
-					<!-- 搜索 -->
-					<form class="form-inline my-2 my-lg-0" action="search.html">
-						<input class="form-control mr-sm-2" type="search" aria-label="Search" />
-						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
-					</form>
-				</div>
-			</nav>
+						</div>
+					</div>
+					<div class="form-group row mt-4">
+						<label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
+						<div class="col-sm-10">
+
+							<input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
+								th:value="${user!=null?user.password:''}" id="password" name="password"
+								placeholder="Please input your password!" required>
+
+							<div class="invalid-feedback" th:text="${passwordMsg}">
+								密码长度不能小于8位!
+							</div>
+
+						</div>
+					</div>
+					<div class="form-group row mt-4">
+						<label for="confirm-password" class="col-sm-2 col-form-label text-right">Password again:</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" th:value="${user!=null?user.password:''}"
+								id="confirm-password" placeholder="Please input your password again!" required>
+							<div class="invalid-feedback">
+								两次输入的密码不一致!
+							</div>
+						</div>
+					</div>
+					<div class="form-group row mt-4">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-10 text-center">
+							<button type="submit" class="btn btn-info text-white form-control">Register Now !</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</header>
 
-	<!-- 内容 -->
-	<div class="main">
-		<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
-			<h3 class="text-center text-info border-bottom pb-3">Register</h3>
-<!--			post请求-->
-			<form class="mt-5" method="post" th:action="@{/register}">
-				<div class="form-group row">
-					<label for="username" class="col-sm-2 col-form-label text-right">UserName:</label>
-					<div class="col-sm-10">
-<!--				该模版是在刚刚注册和错误返回的时候公用的，错误返回的时候，usernameMsg!=null，并且账号还需要先是，user.username从后面controller中传的model里面拿到的，其实也是刚开始注册的时候我们自己在浏览器写的name='' -->
-						<input type="text"
-							   th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
-							   th:value="${user!=null?user.username:''}"
-							   id="username" name="userName" placeholder="Please input your username!" required>
-						<div class="invalid-feedback" th:text="${usernameMsg}">
-							该账号已存在!
+		<!-- footer -->
+		<footer class="bg-dark">
+			<div class="container">
+				<div class="row">
+					<!-- information -->
+					<div class="col-8 detail-info">
+						<div class="row">
+							<div class="col">
+								<ul class="nav">
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">聯絡我們</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">網頁指南</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">提出意見</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">無障礙支援</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">私隱政策</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">免責聲明</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link text-light" href="#">人才招聘</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="form-group row mt-4">
-					<label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
-					<div class="col-sm-10">
+						<div class="row">
+							<div class="col">
+								<ul class="nav btn-group-vertical company-info">
+									<li class="nav-item text-white-50">
+										Address: 香港中文大學
+									</li>
+									<li class="nav-item text-white-50">
+										Contact：admin@cuhk.edu.hk
+									</li>
+									<li class="nav-item text-white-50">
+										香港中文大學2023版權所有
+									</li>
 
-						<input type="password"
-							   th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
-							   th:value="${user!=null?user.password:''}"
-							   id="password" name="password" placeholder="Please input your password!" required>
-
-						<div class="invalid-feedback" th:text="${passwordMsg}">
-							密码长度不能小于8位!
-						</div>
-
-					</div>
-				</div>
-				<div class="form-group row mt-4">
-					<label for="confirm-password" class="col-sm-2 col-form-label text-right">Password again:</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control"
-							   th:value="${user!=null?user.password:''}"
-							   id="confirm-password" placeholder="Please input your password again!" required>
-						<div class="invalid-feedback">
-							两次输入的密码不一致!
-						</div>
-					</div>
-				</div>
-				<div class="form-group row mt-4">
-					<div class="col-sm-2"></div>
-					<div class="col-sm-10 text-center">
-						<button type="submit" class="btn btn-info text-white form-control">Register Now !</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<!-- footer -->
-	<footer class="bg-dark">
-		<div class="container">
-			<div class="row">
-				<!-- information -->
-				<div class="col-8 detail-info">
-					<div class="row">
-						<div class="col">
-							<ul class="nav">
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">聯絡我們</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">網頁指南</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">提出意見</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">無障礙支援</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">私隱政策</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">免責聲明</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-light" href="#">人才招聘</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<ul class="nav btn-group-vertical company-info">
-								<li class="nav-item text-white-50">
-									Address: 香港中文大學
-								</li>
-								<li class="nav-item text-white-50">
-									Contact：admin@cuhk.edu.hk
-								</li>
-								<li class="nav-item text-white-50">
-									香港中文大學2023版權所有
-								</li>
-
-							</ul>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</footer>
-</div>
+		</footer>
+	</div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/js/global.js}"></script>
-<script th:src="@{/js/register.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/global.js}"></script>
+	<script th:src="@{/js/register.js}"></script>
 </body>
+
 </html>
