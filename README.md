@@ -32,8 +32,6 @@ mysql -uroot -pJXZ1234@
 ```
 Import the database
 ```mysql
-create movie_db;
-use movie_db;
 /* copy everything on https://github.com/codeworm111/MovieHeaven/blob/master/SqlGeneration and paste them on the terminal after mysql> */
 ```
 #### redis
