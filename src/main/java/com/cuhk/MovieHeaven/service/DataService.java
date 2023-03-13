@@ -28,12 +28,12 @@ public class DataService {
                     ws.connect();
                     while (!ws.getReadyState().equals(ReadyState.OPEN)) {
                         System.out.println("[1] Connecting...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
                     ws.sendQuery(movieId);
                     while (ws.getRes() == null) {
                         System.out.println("[1] Processing...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
                     List<Review> reviews = ws.getRes().getReviewList();
                     for (Review r : reviews) {
@@ -55,13 +55,13 @@ public class DataService {
                     ws.connect();
                     while (!ws.getReadyState().equals(ReadyState.OPEN)) {
                         System.out.println("[2] Connecting...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
 
                     ws.sendQuery(movieId);
                     while (ws.getRes() == null) {
                         System.out.println("[2] Processing...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
                     List<Review> reviews = ws.getRes().getReviewList();
                     for (Review r : reviews) {
