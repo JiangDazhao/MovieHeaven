@@ -21,6 +21,8 @@ public class DataService {
 
     public float calAveScore(int movieId) {
         Map<Integer, Integer> reviewMap = new HashMap<>();
+        List<Review> list1 = new ArrayList<>();
+        List<Review> list2 = new ArrayList<>();
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -29,19 +31,16 @@ public class DataService {
                     ws.connect();
                     while (!ws.getReadyState().equals(ReadyState.OPEN)) {
                         System.out.println("[1] Connecting...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
                     ws.queryReviews(movieId);
                     while (ws.getRes() == null) {
                         System.out.println("[1] Processing...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
 
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
-                    List<Review> reviews = res.getReviewList();
-                    for (Review r : reviews) {
-                        reviewMap.put(r.getReviewId(), r.getStars());
-                    }
+                    list1.addAll(res.getReviewList());
                     ws.close();
                 } catch (URISyntaxException | InterruptedException e) {
                     e.printStackTrace();
@@ -58,19 +57,16 @@ public class DataService {
                     ws.connect();
                     while (!ws.getReadyState().equals(ReadyState.OPEN)) {
                         System.out.println("[2] Connecting...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
 
                     ws.queryReviews(movieId);
                     while (ws.getRes() == null) {
                         System.out.println("[2] Processing...");
-                        Thread.sleep(1000);
+                        Thread.sleep(1);
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
-                    List<Review> reviews = res.getReviewList();
-                    for (Review r : reviews) {
-                        reviewMap.put(r.getReviewId(), r.getStars());
-                    }
+                    list2.addAll(res.getReviewList());
                     ws.close();
                 } catch (URISyntaxException | InterruptedException e) {
                     e.printStackTrace();
@@ -84,6 +80,13 @@ public class DataService {
             thread2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        for (Review r : list1) {
+            reviewMap.put(r.getReviewId(), r.getStars());
+        }
+        for (Review r : list2) {
+            reviewMap.put(r.getReviewId(), r.getStars());
         }
 
         float sum = 0;
