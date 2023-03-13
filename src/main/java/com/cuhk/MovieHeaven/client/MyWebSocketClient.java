@@ -8,8 +8,13 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import com.alibaba.fastjson.JSON;
+import com.cuhk.MovieHeaven.entity.Review;
+import com.cuhk.MovieHeaven.pojo.InsertRequest;
+import com.cuhk.MovieHeaven.pojo.InsertResponse;
 import com.cuhk.MovieHeaven.pojo.NettyRequest;
 import com.cuhk.MovieHeaven.pojo.NettyResponse;
+import com.cuhk.MovieHeaven.pojo.QueryRequest;
+import com.cuhk.MovieHeaven.pojo.QueryResponse;
 
 public class MyWebSocketClient extends WebSocketClient {
     private NettyResponse res;
@@ -23,9 +28,14 @@ public class MyWebSocketClient extends WebSocketClient {
         this.res = null;
     }
 
-    public void sendQuery(int movieId) {
-        NettyRequest queryId = new NettyRequest(1, movieId);
-        this.send(JSON.toJSONString(queryId));
+    public void queryReviews(int movieId) {
+        NettyRequest req = new QueryRequest(movieId);
+        this.send(JSON.toJSONString(req));
+    }
+
+    public void insertReview(Review review) {
+        NettyRequest req = new InsertRequest(review);
+        this.send(JSON.toJSONString(req));
     }
 
     @Override
@@ -41,8 +51,14 @@ public class MyWebSocketClient extends WebSocketClient {
     @Override
     public void onMessage(String msg) {
         System.out.println("Received: " + msg);
-        NettyResponse rcv_res = JSON.parseObject(msg, NettyResponse.class);
-        this.res = new NettyResponse(rcv_res.getType(), rcv_res.getReviewList());
+        NettyResponse rcv_msg = JSON.parseObject(msg, NettyResponse.class);
+        if (rcv_msg.getType() == 1) {
+            QueryResponse res = JSON.parseObject(msg, QueryResponse.class);
+            this.res = new QueryResponse(res.getReviewList());
+        } else if (rcv_msg.getType() == 2) {
+            InsertResponse res = JSON.parseObject(msg, InsertResponse.class);
+            this.res = new InsertResponse(res.getRowNum());
+        }
     }
 
     @Override

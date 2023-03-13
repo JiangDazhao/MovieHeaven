@@ -18,8 +18,12 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.cuhk.MovieHeaven.dao.ReviewMapper;
 import com.cuhk.MovieHeaven.entity.Review;
+import com.cuhk.MovieHeaven.pojo.InsertRequest;
+import com.cuhk.MovieHeaven.pojo.InsertResponse;
 import com.cuhk.MovieHeaven.pojo.NettyRequest;
 import com.cuhk.MovieHeaven.pojo.NettyResponse;
+import com.cuhk.MovieHeaven.pojo.QueryRequest;
+import com.cuhk.MovieHeaven.pojo.QueryResponse;
 
 @ChannelHandler.Sharable
 @Component
@@ -38,13 +42,19 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
         System.out.println("The message received from the front end:" + msg.text());
         NettyRequest rcv_msg = JSON.parseObject(msg.text(), NettyRequest.class);
         if (rcv_msg.getType() == 1) {
-            List<Review> reviews = reviewMapper.selectAllReviewsByMovieId(rcv_msg.getMovieId());
-            NettyResponse res = new NettyResponse(1, reviews);
+            System.out.println("[Server] It's a Query Request!");
+            QueryRequest req = JSON.parseObject(msg.text(), QueryRequest.class);
+            List<Review> reviews = reviewMapper.selectAllReviewsByMovieId(req.getMovieId());
+            NettyResponse res = new QueryResponse(reviews);
             ctx.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(res)));
             return;
         } else if (rcv_msg.getType() == 2) {
-            System.out.println("type = 2");
-            System.out.println(rcv_msg);
+            System.out.println("[Server] It's a Insert Request!");
+            InsertRequest req = JSON.parseObject(msg.text(), InsertRequest.class);
+            int rowNum = reviewMapper.insertReview(req.getReview());
+            NettyResponse res = new InsertResponse(rowNum);
+            ctx.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(res)));
+            return;
         }
     }
 
