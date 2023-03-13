@@ -45,12 +45,12 @@ public class LoginController implements MovieConstants {
 
     @RequestMapping(path="/register",method = RequestMethod.GET)
     public String getRegisterPage(){
-        return "/site/register";
+        return "site/register";
     }
 
     @RequestMapping(path="/login",method = RequestMethod.GET)
     public String getLoginPage(){
-        return"/site/login";
+        return"site/login";
     }
 
     @RequestMapping(path="/register",method = RequestMethod.POST)
@@ -106,7 +106,7 @@ public class LoginController implements MovieConstants {
 
         if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
             model.addAttribute("codeMsg","Verification code is wrong");
-            return "/site/login";
+            return "site/login";
         }
 
         int expiredSeconds=rememberme?REMEMBER_EXPIRED_SECONDS:DEFAULT_EXPIRED_SECONDS;
