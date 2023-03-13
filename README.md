@@ -13,7 +13,7 @@ http://localhost:8083/movie/
 ##  Run docker image
 ### Get images
 ```shell
-docker import - movie_heaven < movie_heaven.tar
+docker import - movieheaven < movie_heaven.tar
 docker pull mysql
 docker pull redis
 ```
