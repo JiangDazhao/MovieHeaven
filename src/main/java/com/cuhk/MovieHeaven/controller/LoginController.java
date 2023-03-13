@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 @Controller
 public class LoginController implements MovieConstants {
-    private static final Logger logger= LoggerFactory.getLogger(LoginController.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private UserService userService;
 
@@ -43,46 +43,45 @@ public class LoginController implements MovieConstants {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @RequestMapping(path="/register",method = RequestMethod.GET)
-    public String getRegisterPage(){
-        return "/site/register";
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    public String getRegisterPage() {
+        return "site/register";
     }
 
-    @RequestMapping(path="/login",method = RequestMethod.GET)
-    public String getLoginPage(){
-        return"/site/login";
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String getLoginPage() {
+        return "site/login";
     }
 
-    @RequestMapping(path="/register",method = RequestMethod.POST)
-    public String register(Model model, User user){
-        Map<String,Object> map=userService.registerValidate(user);
-        if(map==null||map.isEmpty()){
-            model.addAttribute("msg","Successfully register!");
-            model.addAttribute("target","/login");
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    public String register(Model model, User user) {
+        Map<String, Object> map = userService.registerValidate(user);
+        if (map == null || map.isEmpty()) {
+            model.addAttribute("msg", "Successfully register!");
+            model.addAttribute("target", "/login");
             return "site/operate-result";
-        }else{
-            model.addAttribute("usernameMsg",map.get("usernameMsg"));
-            model.addAttribute("passwordMsg",map.get("passwordMsg"));
+        } else {
+            model.addAttribute("usernameMsg", map.get("usernameMsg"));
+            model.addAttribute("passwordMsg", map.get("passwordMsg"));
             return "site/register";
         }
     }
 
-    @RequestMapping(path="/kaptcha",method = RequestMethod.GET)
-    public void getKaptcha(HttpServletResponse response){
+    @RequestMapping(path = "/kaptcha", method = RequestMethod.GET)
+    public void getKaptcha(HttpServletResponse response) {
         // 生成验证码
         String text = kaptchaProducer.createText();
         BufferedImage image = kaptchaProducer.createImage(text);
 
-
-        String kaptchaKeyStr= MovieUtil.generateUUID();
+        String kaptchaKeyStr = MovieUtil.generateUUID();
         // 将kaptchaKeyStr存入session response作为凭证
         Cookie cookie = new Cookie("kaptcha", kaptchaKeyStr);
         cookie.setPath(CONTEXT_PATH);
         cookie.setMaxAge(60);
         response.addCookie(cookie);
 
-        String redisKey= RedisKeyUtil.getKaptchaKey(kaptchaKeyStr);
-        redisTemplate.opsForValue().set(redisKey,text,60, TimeUnit.SECONDS); //60秒的过期时间
+        String redisKey = RedisKeyUtil.getKaptchaKey(kaptchaKeyStr);
+        redisTemplate.opsForValue().set(redisKey, text, 60, TimeUnit.SECONDS); // 60秒的过期时间
 
         response.setContentType("image/png");
         try {
@@ -94,39 +93,39 @@ public class LoginController implements MovieConstants {
         }
     }
 
-    @RequestMapping(path="/login",method = RequestMethod.POST)
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberme,
-                        Model model, HttpServletResponse response, @CookieValue("kaptcha") String kaptchaKeyStr){
+            Model model, HttpServletResponse response, @CookieValue("kaptcha") String kaptchaKeyStr) {
 
-        String kaptcha=null; //kaptcha处理
-        if(StringUtils.isNotBlank(kaptchaKeyStr)){
-            String redisKey=RedisKeyUtil.getKaptchaKey(kaptchaKeyStr);
-            kaptcha=(String)redisTemplate.opsForValue().get(redisKey);
+        String kaptcha = null; // kaptcha处理
+        if (StringUtils.isNotBlank(kaptchaKeyStr)) {
+            String redisKey = RedisKeyUtil.getKaptchaKey(kaptchaKeyStr);
+            kaptcha = (String) redisTemplate.opsForValue().get(redisKey);
         }
 
-        if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
-            model.addAttribute("codeMsg","Verification code is wrong");
-            return "/site/login";
+        if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
+            model.addAttribute("codeMsg", "Verification code is wrong");
+            return "site/login";
         }
 
-        int expiredSeconds=rememberme?REMEMBER_EXPIRED_SECONDS:DEFAULT_EXPIRED_SECONDS;
-        Map<String,Object> map=userService.login(username,password,expiredSeconds);
-        if(map.containsKey("ticket")){
-            Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
+        int expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
+        Map<String, Object> map = userService.login(username, password, expiredSeconds);
+        if (map.containsKey("ticket")) {
+            Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath(CONTEXT_PATH);
             cookie.setMaxAge(expiredSeconds);
             response.addCookie(cookie);
             return "redirect:/index";
-        }else{
-            model.addAttribute("usernameMsg",map.get("usernameMsg"));
-            model.addAttribute("passwordMsg",map.get("passwordMsg"));
+        } else {
+            model.addAttribute("usernameMsg", map.get("usernameMsg"));
+            model.addAttribute("passwordMsg", map.get("passwordMsg"));
             return "site/login";
         }
     }
 
-    @RequestMapping(path="/logout",method = RequestMethod.GET)
-    public String logout(@CookieValue("ticket") String ticket){
-       userService.logout(ticket);
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket) {
+        userService.logout(ticket);
         return "redirect:/login";
     }
 
