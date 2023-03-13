@@ -2,6 +2,7 @@ package com.cuhk.MovieHeaven.service;
 
 import com.cuhk.MovieHeaven.client.MyWebSocketClient;
 import com.cuhk.MovieHeaven.entity.Review;
+import com.cuhk.MovieHeaven.pojo.QueryResponse;
 
 import org.java_websocket.enums.ReadyState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,13 @@ import java.util.Map;
 
 @Service
 public class DataService {
-    static final String URL1 = "ws://127.0.0.1:8084/netty1";
-    static final String URL2 = "ws://127.0.0.1:8085/netty2";
+    private static final String URL1 = "ws://127.0.0.1:8084/netty1";
+    private static final String URL2 = "ws://127.0.0.1:8085/netty2";
 
     public float calAveScore(int movieId) {
         Map<Integer, Integer> reviewMap = new HashMap<>();
+        List<Review> list1 = new ArrayList<>();
+        List<Review> list2 = new ArrayList<>();
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -30,15 +33,26 @@ public class DataService {
                         System.out.println("[1] Connecting...");
                         Thread.sleep(1);
                     }
-                    ws.sendQuery(movieId);
+                    ws.queryReviews(movieId);
+                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[1] Processing...");
                         Thread.sleep(1);
+<<<<<<< HEAD
                     }
                     List<Review> reviews = ws.getRes().getReviewList();
                     for (Review r : reviews) {
                         reviewMap.put(r.getReviewId(), r.getStars());
+=======
+                        i++;
+                        if (i >= 5000) {
+                            System.out.println("Timeout!!!");
+                            break;
+                        }
+>>>>>>> 906f13257b4b22b52871d7e45fed14aa1877999f
                     }
+                    QueryResponse res = (QueryResponse) ws.getRes();
+                    list1.addAll(res.getReviewList());
                     ws.close();
                 } catch (URISyntaxException | InterruptedException e) {
                     e.printStackTrace();
@@ -58,15 +72,26 @@ public class DataService {
                         Thread.sleep(1);
                     }
 
-                    ws.sendQuery(movieId);
+                    ws.queryReviews(movieId);
+                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[2] Processing...");
                         Thread.sleep(1);
+<<<<<<< HEAD
                     }
                     List<Review> reviews = ws.getRes().getReviewList();
                     for (Review r : reviews) {
                         reviewMap.put(r.getReviewId(), r.getStars());
+=======
+                        i++;
+                        if (i >= 5000) {
+                            System.out.println("Timeout!!!");
+                            break;
+                        }
+>>>>>>> 906f13257b4b22b52871d7e45fed14aa1877999f
                     }
+                    QueryResponse res = (QueryResponse) ws.getRes();
+                    list2.addAll(res.getReviewList());
                     ws.close();
                 } catch (URISyntaxException | InterruptedException e) {
                     e.printStackTrace();
@@ -80,6 +105,13 @@ public class DataService {
             thread2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        for (Review r : list1) {
+            reviewMap.put(r.getReviewId(), r.getStars());
+        }
+        for (Review r : list2) {
+            reviewMap.put(r.getReviewId(), r.getStars());
         }
 
         float sum = 0;

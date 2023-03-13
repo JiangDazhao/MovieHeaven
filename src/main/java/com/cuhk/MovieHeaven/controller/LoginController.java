@@ -103,8 +103,8 @@ public class LoginController implements MovieConstants {
             kaptcha = (String) redisTemplate.opsForValue().get(redisKey);
         }
 
-        if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
-            model.addAttribute("codeMsg", "Verification code is wrong");
+        if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
+            model.addAttribute("codeMsg","Verification code is wrong");
             return "site/login";
         }
 
