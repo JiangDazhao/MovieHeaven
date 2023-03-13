@@ -20,8 +20,7 @@ Login
 mysql -uroot -pJXZ1234@
 ```
 Import the database
-```mysql
-/* copy everything on https://github.com/codeworm111/MovieHeaven/blob/master/SqlGeneration and paste them on the terminal after mysql> */
+copy everything on [SqlGeneration](https://github.com/codeworm111/MovieHeaven/blob/master/SqlGeneration) and paste them on the terminal after mysql>
 ```
 #### redis
 ```shell
