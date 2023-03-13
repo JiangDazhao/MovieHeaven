@@ -72,7 +72,7 @@ public class UserService {
         // 通过用户名从数据库拿到唯一的用户
         User user = userMapper.selectByName(username);
         if (user == null) {
-            map.put("usernameMsg", "The account is Empty!");
+            map.put("usernameMsg", "The account doesn't exist!");
             return map;
         }
 
