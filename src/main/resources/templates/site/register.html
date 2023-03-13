@@ -71,7 +71,7 @@
 <!--				该模版是在刚刚注册和错误返回的时候公用的，错误返回的时候，usernameMsg!=null，并且账号还需要先是，user.username从后面controller中传的model里面拿到的，其实也是刚开始注册的时候我们自己在浏览器写的name='' -->
 						<input type="text"
 							   th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
-							   th:value="${user!=null?user.userName:''}"
+							   th:value="${user!=null?user.username:''}"
 							   id="username" name="userName" placeholder="Please input your username!" required>
 						<div class="invalid-feedback" th:text="${usernameMsg}">
 							该账号已存在!
