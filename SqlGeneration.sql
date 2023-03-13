@@ -72,8 +72,4 @@ create table user(
 INSERT INTO user VALUES
                      (1,'jiangxuzhao','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://avatars.githubusercontent.com/u/56500172?v=4'),
                      (2,'wuxiang','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','http://images.nowcoder.com/head/674t.png'),
-<<<<<<< HEAD:SqlGeneration.sql
                      (3,'guoxiaoyan','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://github.com/Tangent617/Tangent617.github.io/blob/main/images/avatar.png?raw=true');
-=======
-                     (3,'guoxiaoyan','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://github.com/Tangent617/Tangent617.github.io/blob/main/images/avatar.png?raw=true');
->>>>>>> 906f13257b4b22b52871d7e45fed14aa1877999f:SqlGeneration

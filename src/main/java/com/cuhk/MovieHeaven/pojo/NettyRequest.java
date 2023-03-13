@@ -8,8 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NettyRequest {
     private int type;
+    private int movieId;
 
-    public NettyRequest(int type) {
+    public NettyRequest(int type, int movieId) {
         this.type = type;
+        if (type == 1) {
+            this.movieId = movieId;
+        }
     }
 }
