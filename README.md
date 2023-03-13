@@ -11,7 +11,7 @@ docker pull redis
 ```shell
 docker run --name mymysql -e MYSQL_ROOT_PASSWORD=JXZ1234@ -d -p 3306:3306  mysql
 ```
-Copy SqlGeneration.sql into the container.
+Copy [SqlGeneration.sql](SqlGeneration.sql) into the container.
 ```shell
 docker cp SqlGeneration.sql mymysql:/home/SqlGeneration.sql
 ```
