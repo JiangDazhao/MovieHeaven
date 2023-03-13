@@ -43,7 +43,7 @@ create table review(
                        movie_id       int         null,
                        user_id        int         null,
                        stars          int         null,
-                       review_content varchar(45) null,
+                       review_content varchar(200) null,
                        review_time    datetime    null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -70,5 +70,6 @@ create table user(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO user VALUES
-                     (1,'jiangxuzhao','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://cdn.jsdelivr.net/gh/Tangent617/Tangent617.github.io@main/images/avatar.png'),
-                     (2,'wuxiang','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','http://images.nowcoder.com/head/674t.png')
+                     (1,'jiangxuzhao','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://avatars.githubusercontent.com/u/56500172?v=4'),
+                     (2,'wuxiang','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','http://images.nowcoder.com/head/674t.png'),
+                     (3,'guoxiaoyan','4ff5a4ebfbecf1e91acf2735f635b861','f30dd','https://github.com/Tangent617/Tangent617.github.io/blob/main/images/avatar.png?raw=true');
