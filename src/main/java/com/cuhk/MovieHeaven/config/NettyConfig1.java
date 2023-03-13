@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "netty")
-public class NettyConfig {
+@ConfigurationProperties(prefix = "netty1")
+public class NettyConfig1 {
     private int port;
     private String path;
 
