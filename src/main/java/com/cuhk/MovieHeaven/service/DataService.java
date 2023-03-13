@@ -20,46 +20,68 @@ public class DataService {
 
     public float calAveScore(int movieId) {
         Map<Integer, Integer> reviewMap = new HashMap<>();
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MyWebSocketClient ws = new MyWebSocketClient(URL1);
+                    ws.connect();
+                    while (!ws.getReadyState().equals(ReadyState.OPEN)) {
+                        System.out.println("[1] Connecting...");
+                        Thread.sleep(1000);
+                    }
+                    ws.sendQuery(movieId);
+                    while (ws.getRes() == null) {
+                        System.out.println("[1] Processing...");
+                        Thread.sleep(1000);
+                    }
+                    List<Review> reviews = ws.getRes().getReviewList();
+                    for (Review r : reviews) {
+                        reviewMap.put(r.getReviewId(), r.getStars());
+                    }
+                    ws.close();
+                } catch (URISyntaxException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread1.start();
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MyWebSocketClient ws = new MyWebSocketClient(URL2);
+                    ws.connect();
+                    while (!ws.getReadyState().equals(ReadyState.OPEN)) {
+                        System.out.println("[2] Connecting...");
+                        Thread.sleep(1000);
+                    }
+
+                    ws.sendQuery(movieId);
+                    while (ws.getRes() == null) {
+                        System.out.println("[2] Processing...");
+                        Thread.sleep(1000);
+                    }
+                    List<Review> reviews = ws.getRes().getReviewList();
+                    for (Review r : reviews) {
+                        reviewMap.put(r.getReviewId(), r.getStars());
+                    }
+                    ws.close();
+                } catch (URISyntaxException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread2.start();
+
         try {
-            MyWebSocketClient ws = new MyWebSocketClient(URL1);
-            ws.connect();
-            while (!ws.getReadyState().equals(ReadyState.OPEN)) {
-                System.out.println("Connecting...");
-                Thread.sleep(1000);
-            }
-            ws.sendQuery(movieId);
-            while (ws.getRes() == null) {
-                System.out.println("Processing...");
-                Thread.sleep(1000);
-            }
-            List<Review> reviews = ws.getRes().getReviewList();
-            for (Review r : reviews) {
-                reviewMap.put(r.getReviewId(), r.getStars());
-            }
-            ws.close();
-        } catch (URISyntaxException | InterruptedException e) {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        try {
-            MyWebSocketClient ws = new MyWebSocketClient(URL2);
-            ws.connect();
-            while (!ws.getReadyState().equals(ReadyState.OPEN)) {
-                System.out.println("Connecting...");
-                Thread.sleep(1000);
-            }
-            ws.sendQuery(movieId);
-            while (ws.getRes() == null) {
-                System.out.println("Processing...");
-                Thread.sleep(1000);
-            }
-            List<Review> reviews = ws.getRes().getReviewList();
-            for (Review r : reviews) {
-                reviewMap.put(r.getReviewId(), r.getStars());
-            }
-            ws.close();
-        } catch (URISyntaxException | InterruptedException e) {
-            e.printStackTrace();
-        }
+
         float sum = 0;
         int size = reviewMap.size();
         if (reviewMap != null) {

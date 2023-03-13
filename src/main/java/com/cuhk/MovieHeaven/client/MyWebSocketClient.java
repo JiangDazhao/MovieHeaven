@@ -30,7 +30,7 @@ public class MyWebSocketClient extends WebSocketClient {
 
     @Override
     public void onClose(int arg0, String arg1, boolean arg2) {
-        System.out.println("Close.");
+        System.out.println("Closed.");
     }
 
     @Override
