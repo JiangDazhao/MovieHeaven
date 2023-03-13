@@ -5,14 +5,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.cuhk.MovieHeaven.config.NettyConfig;
+import com.cuhk.MovieHeaven.config.NettyConfig1;
+import com.cuhk.MovieHeaven.config.NettyConfig2;
 import com.cuhk.MovieHeaven.server.NettyServer;
 
 @SpringBootApplication
 public class MovieHeavenApplication implements CommandLineRunner {
 
 	@Autowired
-	private NettyConfig nettyConfig;
+	private NettyConfig1 nettyConfig1;
+
+	@Autowired
+	private NettyConfig2 nettyConfig2;
 
 	@Autowired
 	private NettyServer nettyServer;
@@ -26,7 +30,14 @@ public class MovieHeavenApplication implements CommandLineRunner {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				nettyServer.start(nettyConfig.getPort());
+				nettyServer.start(nettyConfig1.getPort(), nettyConfig1.getPath());
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				nettyServer.start(nettyConfig2.getPort(), nettyConfig2.getPath());
 			}
 		}).start();
 	}

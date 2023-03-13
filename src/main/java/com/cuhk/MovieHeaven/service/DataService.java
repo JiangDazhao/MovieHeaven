@@ -4,19 +4,24 @@ import com.cuhk.MovieHeaven.client.MyWebSocketClient;
 import com.cuhk.MovieHeaven.entity.Review;
 
 import org.java_websocket.enums.ReadyState;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataService {
+    static final String URL1 = "ws://127.0.0.1:8084/netty1";
+    static final String URL2 = "ws://127.0.0.1:8085/netty2";
 
     public float calAveScore(int movieId) {
-        List<Review> reviews = new ArrayList<>();
+        Map<Integer, Integer> reviewMap = new HashMap<>();
         try {
-            MyWebSocketClient ws = new MyWebSocketClient("ws://127.0.0.1:8084/netty");
+            MyWebSocketClient ws = new MyWebSocketClient(URL1);
             ws.connect();
             while (!ws.getReadyState().equals(ReadyState.OPEN)) {
                 System.out.println("Connecting...");
@@ -27,16 +32,39 @@ public class DataService {
                 System.out.println("Processing...");
                 Thread.sleep(1000);
             }
-            reviews.addAll(ws.getRes().getReviewList());
+            List<Review> reviews = ws.getRes().getReviewList();
+            for (Review r : reviews) {
+                reviewMap.put(r.getReviewId(), r.getStars());
+            }
+            ws.close();
+        } catch (URISyntaxException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            MyWebSocketClient ws = new MyWebSocketClient(URL2);
+            ws.connect();
+            while (!ws.getReadyState().equals(ReadyState.OPEN)) {
+                System.out.println("Connecting...");
+                Thread.sleep(1000);
+            }
+            ws.sendQuery(movieId);
+            while (ws.getRes() == null) {
+                System.out.println("Processing...");
+                Thread.sleep(1000);
+            }
+            List<Review> reviews = ws.getRes().getReviewList();
+            for (Review r : reviews) {
+                reviewMap.put(r.getReviewId(), r.getStars());
+            }
             ws.close();
         } catch (URISyntaxException | InterruptedException e) {
             e.printStackTrace();
         }
         float sum = 0;
-        int size = reviews.size();
-        if (reviews != null) {
-            for (Review review : reviews) {
-                sum += review.getStars();
+        int size = reviewMap.size();
+        if (reviewMap != null) {
+            for (Integer star : reviewMap.values()) {
+                sum += star;
             }
         }
         return size == 0 ? 0 : sum / size;

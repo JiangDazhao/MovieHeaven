@@ -20,11 +20,12 @@ public class NettyServer implements DisposableBean {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    public void start(int port) {
+    public void start(int port, String path) {
         bossGroup = new NioEventLoopGroup(1);
         workerGroup = new NioEventLoopGroup();
 
         ServerBootstrap serverBootstrap = new ServerBootstrap();
+        serverChannelInitializer.setPath(path);
         serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .handler(new LoggingHandler())
