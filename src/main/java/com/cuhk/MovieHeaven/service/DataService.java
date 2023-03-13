@@ -34,10 +34,15 @@ public class DataService {
                         Thread.sleep(1);
                     }
                     ws.queryReviews(movieId);
+                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[1] Processing...");
                         Thread.sleep(1);
-
+                        i++;
+                        if (i >= 5000) {
+                            System.out.println("Timeout!!!");
+                            break;
+                        }
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
                     list1.addAll(res.getReviewList());
@@ -61,9 +66,15 @@ public class DataService {
                     }
 
                     ws.queryReviews(movieId);
+                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[2] Processing...");
                         Thread.sleep(1);
+                        i++;
+                        if (i >= 5000) {
+                            System.out.println("Timeout!!!");
+                            break;
+                        }
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
                     list2.addAll(res.getReviewList());

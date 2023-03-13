@@ -65,9 +65,15 @@ public class ReviewService {
                     Thread.sleep(1);
                 }
                 ws.insertReview(review);
+                int i = 0;
                 while (ws.getRes() == null) {
                     System.out.println("[1] Processing...");
-                    Thread.sleep(1);
+                    Thread.sleep(1000);
+                    i++;
+                    if (i >= 5) {
+                        System.out.println("Timeout!!!");
+                        break;
+                    }
                 }
                 InsertResponse res = (InsertResponse) ws.getRes();
                 rowNum = res.getRowNum();
@@ -84,9 +90,15 @@ public class ReviewService {
                     Thread.sleep(1);
                 }
                 ws.insertReview(review);
+                int i = 0;
                 while (ws.getRes() == null) {
                     System.out.println("[2] Processing...");
-                    Thread.sleep(1);
+                    Thread.sleep(1000);
+                    i++;
+                    if (i >= 5) {
+                        System.out.println("Timeout!!!");
+                        break;
+                    }
                 }
                 InsertResponse res = (InsertResponse) ws.getRes();
                 rowNum = res.getRowNum();
