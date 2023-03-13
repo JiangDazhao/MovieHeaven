@@ -32,18 +32,10 @@ public class DataService {
                         Thread.sleep(1000);
                     }
                     ws.queryReviews(movieId);
-                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[1] Processing...");
                         Thread.sleep(1000);
-<<<<<<< Updated upstream
-=======
-                        i++;
-                        if (i >= 3) {
-                            System.out.println("[2]Process Failed!!!!!");
-                            break;
-                        }
->>>>>>> Stashed changes
+
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
                     List<Review> reviews = res.getReviewList();
@@ -70,18 +62,9 @@ public class DataService {
                     }
 
                     ws.queryReviews(movieId);
-                    int i = 0;
                     while (ws.getRes() == null) {
                         System.out.println("[2] Processing...");
                         Thread.sleep(1000);
-<<<<<<< Updated upstream
-=======
-                        i++;
-                        if (i >= 3) {
-                            System.out.println("[2]Process Failed!!!!!");
-                            break;
-                        }
->>>>>>> Stashed changes
                     }
                     QueryResponse res = (QueryResponse) ws.getRes();
                     List<Review> reviews = res.getReviewList();
