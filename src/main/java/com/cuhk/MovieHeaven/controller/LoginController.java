@@ -77,11 +77,11 @@ public class LoginController implements MovieConstants {
         // 将kaptchaKeyStr存入session response作为凭证
         Cookie cookie = new Cookie("kaptcha", kaptchaKeyStr);
         cookie.setPath(CONTEXT_PATH);
-        cookie.setMaxAge(60);
+        cookie.setMaxAge(5*60);
         response.addCookie(cookie);
 
         String redisKey = RedisKeyUtil.getKaptchaKey(kaptchaKeyStr);
-        redisTemplate.opsForValue().set(redisKey, text, 60, TimeUnit.SECONDS); // 60秒的过期时间
+        redisTemplate.opsForValue().set(redisKey, text, 5*60, TimeUnit.SECONDS); // 60秒的过期时间
 
         response.setContentType("image/png");
         try {
