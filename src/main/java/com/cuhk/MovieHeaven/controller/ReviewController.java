@@ -1,5 +1,6 @@
 package com.cuhk.MovieHeaven.controller;
 
+import com.cuhk.MovieHeaven.annotation.LoginRequired;
 import com.cuhk.MovieHeaven.entity.Review;
 import com.cuhk.MovieHeaven.service.ReviewService;
 import com.cuhk.MovieHeaven.util.HostHolder;
@@ -18,7 +19,7 @@ public class ReviewController {
     HostHolder hostHolder;
     @Autowired
     ReviewService reviewService;
-
+    @LoginRequired
     @RequestMapping(path = "/add/{movieId}",method = RequestMethod.POST)
     public String addReview(@PathVariable("movieId") int movieId, Review review){ // review里面已经携带了name="stars"，name="reviewContent"，name="movieId"
         review.setUserId(hostHolder.getUser().getUserId());
