@@ -33,5 +33,5 @@ docker run --name myredis -p 6379:6379 -d redis redis-server --appendonly yes
 ```
 #### movieheaven
 ```shell
-docker run -p 8083:8083 --name movieheaven  --link mymysql:emysql --link myredis:eredis -d movieheaven-image
+docker run -p 8083:8083 --name movieheaven  --link mymysql:emysql --link myredis:eredis -d movieheaven /bin/sh -c 'java -jar /opt/MovieHeaven/MovieHeaven.jar'
 ```
